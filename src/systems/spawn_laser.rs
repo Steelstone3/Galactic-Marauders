@@ -7,8 +7,8 @@ use bevy::{
 };
 
 use crate::{
-    components::{player::Player, laser::Laser},
-    resources::laser_ammunition::LaserAmmunition,
+    components::{laser::Laser, player::Player},
+    resources::{laser_ammunition::LaserAmmunition, selected_weapon::SelectedWeapon},
 };
 
 pub fn spawn_laser(
@@ -16,6 +16,7 @@ pub fn spawn_laser(
     _asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<LaserAmmunition>,
+    selected_weapon: ResMut<SelectedWeapon>,
     player: Query<&Transform, With<Player>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
@@ -29,23 +30,26 @@ pub fn spawn_laser(
         return;
     }
 
-    commands
-        .spawn(SpriteBundle {
-            sprite: Sprite {
-                custom_size: Some(Vec2::new(10.0, 10.0)),
-                color: bevy::prelude::Color::hex("FF2800").unwrap(),
+    if selected_weapon.0 == 1 {
+        commands
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(Vec2::new(10.0, 10.0)),
+                    color: bevy::prelude::Color::hex("FF2800").unwrap(),
+                    ..Default::default()
+                },
+                transform: *player_transform,
+                // texture,
                 ..Default::default()
-            },
-            transform: *player_transform,
-            // texture,
-            ..Default::default()
-        })
-        .insert(Laser {
-            speed: 0.0,
-            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
-        });
+            })
+            .insert(Laser {
+                speed: 0.0,
+                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+            });
+    }
 
     ammunition.0 -= 1.0;
+
     info!(
         "Used 1 laser charge. {:?} laser charge remaining",
         ammunition.0
