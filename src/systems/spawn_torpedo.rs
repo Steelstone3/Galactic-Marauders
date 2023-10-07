@@ -49,9 +49,10 @@ pub fn spawn_torpedo(
                 speed: 0.0,
                 lifetime: Timer::from_seconds(10.0, TimerMode::Once),
             });
+            
+            ammunition.0 -= 1.0;
     }
 
-    ammunition.0 -= 1.0;
 
     info!("Fired 1 torpedo. {:?} torpedos remaining", ammunition.0);
 }

@@ -46,9 +46,10 @@ pub fn spawn_laser(
                 speed: 0.0,
                 lifetime: Timer::from_seconds(10.0, TimerMode::Once),
             });
+            
+            ammunition.0 -= 1.0;
     }
 
-    ammunition.0 -= 1.0;
 
     info!(
         "Used 1 laser charge. {:?} laser charge remaining",
