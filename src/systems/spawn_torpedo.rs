@@ -8,7 +8,7 @@ use bevy::{
 
 use crate::{
     components::{player::Player, torpedo::Torpedo},
-    resources::torpedo_ammunition::TorpedoAmmunition,
+    resources::{selected_weapon::SelectedWeapon, torpedo_ammunition::TorpedoAmmunition},
 };
 
 pub fn spawn_torpedo(
@@ -16,35 +16,39 @@ pub fn spawn_torpedo(
     _asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<TorpedoAmmunition>,
+    selected_weapon: ResMut<SelectedWeapon>,
     player: Query<&Transform, With<Player>>,
 ) {
-    if !input.just_pressed(KeyCode::T) {
+    if !input.just_pressed(KeyCode::Space) {
         return;
     }
 
-    let player_transform = player.get_single().unwrap();
+    if selected_weapon.0 == 2 {
+        let player_transform = player.get_single().unwrap();
 
-    if ammunition.0 < 1.0 {
-        info!("Out of torpedos");
-        return;
-    }
+        if ammunition.0 < 1.0 {
+            info!("Out of torpedos");
+            return;
+        }
 
-    commands
-        .spawn(SpriteBundle {
-            sprite: Sprite {
-                custom_size: Some(Vec2::new(15.0, 15.0)),
-                color: bevy::prelude::Color::hex("FF8700").unwrap(),
+        commands
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(Vec2::new(15.0, 15.0)),
+                    color: bevy::prelude::Color::hex("FF8700").unwrap(),
+                    ..Default::default()
+                },
+                transform: *player_transform,
+                // texture,
                 ..Default::default()
-            },
-            transform: *player_transform,
-            // texture,
-            ..Default::default()
-        })
-        .insert(Torpedo {
-            speed: 0.0,
-            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
-        });
+            })
+            .insert(Torpedo {
+                speed: 0.0,
+                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+            });
 
-    ammunition.0 -= 1.0;
-    info!("Fired 1 torpedo. {:?} torpedos remaining", ammunition.0);
+        ammunition.0 -= 1.0;
+
+        info!("Fired 1 torpedo. {:?} torpedos remaining", ammunition.0);
+    }
 }
