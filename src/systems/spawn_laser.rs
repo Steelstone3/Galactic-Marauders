@@ -7,15 +7,15 @@ use bevy::{
 };
 
 use crate::{
-    components::{mine::Mine, player::Player},
-    resources::mine_ammunition::MineAmmunition,
+    components::{player::Player, laser::Laser},
+    resources::laser_ammunition::LaserAmmunition,
 };
 
-pub fn spawn_mine(
+pub fn spawn_laser(
     mut commands: Commands,
     _asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
-    mut ammunition: ResMut<MineAmmunition>,
+    mut ammunition: ResMut<LaserAmmunition>,
     player: Query<&Transform, With<Player>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
@@ -25,7 +25,7 @@ pub fn spawn_mine(
     let player_transform = player.get_single().unwrap();
 
     if ammunition.0 < 1.0 {
-        info!("Out of mines");
+        info!("Out of laser charge");
         return;
     }
 
@@ -33,18 +33,21 @@ pub fn spawn_mine(
         .spawn(SpriteBundle {
             sprite: Sprite {
                 custom_size: Some(Vec2::new(10.0, 10.0)),
-                color: bevy::prelude::Color::hex("FF8700").unwrap(),
+                color: bevy::prelude::Color::hex("FF2800").unwrap(),
                 ..Default::default()
             },
             transform: *player_transform,
             // texture,
             ..Default::default()
         })
-        .insert(Mine {
+        .insert(Laser {
             speed: 0.0,
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         });
 
     ammunition.0 -= 1.0;
-    info!("Fired 1 mine. {:?} mines remaining", ammunition.0);
+    info!(
+        "Used 1 laser charge. {:?} laser charge remaining",
+        ammunition.0
+    );
 }

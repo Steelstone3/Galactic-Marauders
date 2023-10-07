@@ -1,2 +1,3 @@
-pub mod mine;
+pub mod laser;
 pub mod player;
+pub mod torpedo;

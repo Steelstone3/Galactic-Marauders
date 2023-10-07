@@ -16,7 +16,7 @@ fn main() {
                 .set(ImagePlugin::default_nearest())
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        title: "Superior Space Fighters".to_string(),
+                        title: "Galactic Marauders".to_string(),
                         ..Default::default()
                     }),
                     ..Default::default()
