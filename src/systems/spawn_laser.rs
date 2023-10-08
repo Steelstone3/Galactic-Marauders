@@ -35,7 +35,7 @@ pub fn spawn_laser(
         let texture = asset_server.load("player_laser.png");
 
         let laser = Laser {
-            speed: 10.0,
+            speed: 600.0,
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
             size: Vec2::new(20.0, 20.0),
             scale: Vec3::new(1.0, 1.0, 1.0),

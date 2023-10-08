@@ -6,4 +6,6 @@ pub mod spawn_laser;
 pub mod spawn_player;
 pub mod spawn_torpedo;
 pub mod torpedo_lifetime;
+pub mod torpedo_movement;
 pub mod window_resolution;
+pub mod laser_movement;
