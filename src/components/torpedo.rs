@@ -1,4 +1,8 @@
-use bevy::{ecs::component::Component, time::Timer, prelude::{Vec3, Vec2}};
+use bevy::{
+    ecs::component::Component,
+    prelude::{Vec2, Vec3},
+    time::Timer,
+};
 
 #[derive(Component)]
 pub struct Torpedo {

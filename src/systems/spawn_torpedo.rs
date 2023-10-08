@@ -1,6 +1,7 @@
 use bevy::{
     prelude::{
-        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With, Vec3,
+        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, Vec3,
+        With,
     },
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
