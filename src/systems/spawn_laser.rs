@@ -13,7 +13,7 @@ use crate::{
 
 pub fn spawn_laser(
     mut commands: Commands,
-    _asset_server: Res<AssetServer>,
+    asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<LaserAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
@@ -31,15 +31,16 @@ pub fn spawn_laser(
             return;
         }
 
+        let texture = asset_server.load("player_laser.png");
+
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
                     custom_size: Some(Vec2::new(10.0, 10.0)),
-                    color: bevy::prelude::Color::hex("FF2800").unwrap(),
                     ..Default::default()
                 },
                 transform: *player_transform,
-                // texture,
+                texture,
                 ..Default::default()
             })
             .insert(Laser {

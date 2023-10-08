@@ -44,7 +44,6 @@ pub fn spawn_torpedo(
             .spawn(SpriteBundle {
                 sprite: Sprite {
                     custom_size: Some(torpedo.size),
-                    color: bevy::prelude::Color::hex("FF8700").unwrap(),
                     ..Default::default()
                 },
                 transform: *player_transform,
