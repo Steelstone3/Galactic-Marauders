@@ -1,3 +1,4 @@
+pub mod alien_movement;
 pub mod camera;
 pub mod laser_lifetime;
 pub mod laser_movement;

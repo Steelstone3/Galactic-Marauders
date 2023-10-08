@@ -1,6 +1,6 @@
 [package]
 name = "galactic-marauders"
-version = "0.1.5"
+version = "0.1.6"
 authors = ["Skippy <steelstone3@gmail.com>"]
 edition = "2021"
 homepage = "https://github.com/Steelstone3/Bubbles-Dive-Planner-Console"

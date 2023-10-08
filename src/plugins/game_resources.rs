@@ -14,7 +14,7 @@ impl Plugin for GameResourcesPlugin {
             .insert_resource(LaserAmmunition(10.0))
             .insert_resource(TorpedoAmmunition(3.0))
             .insert_resource(SelectedWeapon(1))
-            .insert_resource(EnemyCount(0))
+            .insert_resource(EnemyCount(Default::default()))
             .insert_resource(EnemyLimit(1));
     }
 }

@@ -1,5 +1,5 @@
 use crate::systems::{
-    laser_lifetime::laser_lifetime, laser_movement::laser_movement,
+    alien_movement::alien_movement, laser_lifetime::laser_lifetime, laser_movement::laser_movement,
     player_movement::player_movement, player_weapon_select::weapon_select,
     spawn_alien::spawn_alien, spawn_laser::spawn_laser, spawn_torpedo::spawn_torpedo,
     torpedo_lifetime::torpedo_lifetime, torpedo_movement::torpedo_movement,
@@ -11,6 +11,7 @@ pub struct GameRunningPlugin;
 impl Plugin for GameRunningPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Update, spawn_alien)
+            .add_systems(Update, alien_movement)
             .add_systems(Update, player_movement)
             .add_systems(Update, spawn_laser)
             .add_systems(Update, laser_lifetime)

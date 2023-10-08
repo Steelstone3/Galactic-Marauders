@@ -1,5 +1,5 @@
 use crate::{
-    components::alien::Alien,
+    components::alien::{Alien, Direction},
     resources::{enemy_count::EnemyCount, enemy_limit::EnemyLimit},
 };
 use bevy::{
@@ -19,12 +19,13 @@ pub fn spawn_alien(
         let texture = asset_server.load("enemy.png");
         let alien = Alien {
             speed: 300.0,
-            size: Vec2::new(100.0, 100.0),
+            size: Vec2::new(80.0, 80.0),
             scale: Vec3 {
                 x: 1.0,
                 y: 1.0,
                 z: 1.0,
             },
+            direction: Direction::Right,
         };
 
         commands
