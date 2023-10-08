@@ -13,7 +13,7 @@ use crate::{
 
 pub fn spawn_torpedo(
     mut commands: Commands,
-    _asset_server: Res<AssetServer>,
+    asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<TorpedoAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
@@ -31,6 +31,8 @@ pub fn spawn_torpedo(
             return;
         }
 
+        let texture = asset_server.load("player_torpedo.png");
+
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
@@ -39,7 +41,7 @@ pub fn spawn_torpedo(
                     ..Default::default()
                 },
                 transform: *player_transform,
-                // texture,
+                texture,
                 ..Default::default()
             })
             .insert(Torpedo {
