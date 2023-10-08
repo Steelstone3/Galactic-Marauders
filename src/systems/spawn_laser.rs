@@ -1,6 +1,7 @@
 use bevy::{
     prelude::{
-        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
+        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, Vec3,
+        With,
     },
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
@@ -13,7 +14,7 @@ use crate::{
 
 pub fn spawn_laser(
     mut commands: Commands,
-    _asset_server: Res<AssetServer>,
+    asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<LaserAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
@@ -31,21 +32,26 @@ pub fn spawn_laser(
             return;
         }
 
+        let texture = asset_server.load("player_laser.png");
+
+        let laser = Laser {
+            speed: 600.0,
+            lifetime: Timer::from_seconds(5.0, TimerMode::Once),
+            size: Vec2::new(20.0, 20.0),
+            scale: Vec3::new(1.0, 1.0, 1.0),
+        };
+
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(Vec2::new(10.0, 10.0)),
-                    color: bevy::prelude::Color::hex("FF2800").unwrap(),
+                    custom_size: Some(laser.size),
                     ..Default::default()
                 },
                 transform: *player_transform,
-                // texture,
+                texture,
                 ..Default::default()
             })
-            .insert(Laser {
-                speed: 0.0,
-                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
-            });
+            .insert(laser);
 
         ammunition.0 -= 1.0;
 

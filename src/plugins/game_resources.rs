@@ -10,8 +10,8 @@ impl Plugin for GameResourcesPlugin {
     fn build(&self, app: &mut App) {
         app.insert_resource(WindowSize::default())
             .insert_resource(Points::default())
-            .insert_resource(LaserAmmunition(50.0))
-            .insert_resource(TorpedoAmmunition(10.0))
+            .insert_resource(LaserAmmunition(10.0))
+            .insert_resource(TorpedoAmmunition(3.0))
             .insert_resource(SelectedWeapon(1));
     }
 }
