@@ -1,6 +1,6 @@
 use bevy::{
     prelude::{
-        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
+        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With, Vec3,
     },
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
@@ -33,10 +33,17 @@ pub fn spawn_torpedo(
 
         let texture = asset_server.load("player_torpedo.png");
 
+        let torpedo = Torpedo {
+            speed: 0.0,
+            size: Vec2::new(15.0, 15.0),
+            scale: Vec3::new(1.0, 1.0, 1.0),
+            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+        };
+
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(Vec2::new(15.0, 15.0)),
+                    custom_size: Some(torpedo.size),
                     color: bevy::prelude::Color::hex("FF8700").unwrap(),
                     ..Default::default()
                 },
@@ -44,10 +51,7 @@ pub fn spawn_torpedo(
                 texture,
                 ..Default::default()
             })
-            .insert(Torpedo {
-                speed: 0.0,
-                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
-            });
+            .insert(torpedo);
 
         ammunition.0 -= 1.0;
 
