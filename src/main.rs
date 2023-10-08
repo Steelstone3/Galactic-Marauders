@@ -17,6 +17,7 @@ fn main() {
                 .set(WindowPlugin {
                     primary_window: Some(Window {
                         title: "Galactic Marauders".to_string(),
+                        resolution: (640.0, 480.0).into(),
                         ..Default::default()
                     }),
                     ..Default::default()

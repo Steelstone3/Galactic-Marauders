@@ -24,6 +24,7 @@ pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
                 ..Default::default()
             },
             transform: Transform {
+                scale: player.scale,
                 ..Default::default()
             },
             texture,

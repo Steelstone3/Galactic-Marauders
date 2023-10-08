@@ -1,5 +1,5 @@
 use bevy::{
-    prelude::{Input, KeyCode, Query, Res, ResMut, Transform},
+    prelude::{Input, KeyCode, Query, Res, ResMut, Transform, Mut},
     time::Time,
 };
 
@@ -17,11 +17,14 @@ pub fn player_movement(
         player_y_location(&window_size, player, &mut transform);
 
         // Right
-        if input.pressed(KeyCode::D) {
+        if input.pressed(KeyCode::D) && !is_right_bound(window_size.width, transform.translation.x)
+        {
             transform.translation.x += player_speed;
         }
         // Left
-        else if input.pressed(KeyCode::A) {
+        else if input.pressed(KeyCode::A)
+            && !is_left_bound(window_size.width, transform.translation.x)
+        {
             transform.translation.x -= player_speed;
         }
     }
@@ -30,10 +33,18 @@ pub fn player_movement(
 fn player_y_location(
     window_size: &ResMut<'_, WindowSize>,
     player: &Player,
-    transform: &mut bevy::prelude::Mut<'_, Transform>,
+    transform: &mut Mut<'_, Transform>,
 ) {
     let spawn_area = -window_size.height / 2.0;
     let spawn_location = spawn_area + player.size.y / 2.0 * player.scale.y + 20.0;
 
     transform.translation.y = spawn_location;
+}
+
+fn is_left_bound(window_width: f32, horizontal_position: f32) -> bool {
+    -horizontal_position > window_width / 2.0
+}
+
+fn is_right_bound(window_width: f32, horizontal_position: f32) -> bool {
+    horizontal_position > window_width / 2.0
 }
