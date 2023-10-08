@@ -36,7 +36,7 @@ pub fn spawn_laser(
 
         let laser = Laser {
             speed: 600.0,
-            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+            lifetime: Timer::from_seconds(5.0, TimerMode::Once),
             size: Vec2::new(20.0, 20.0),
             scale: Vec3::new(1.0, 1.0, 1.0),
         };

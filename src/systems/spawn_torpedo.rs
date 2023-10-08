@@ -38,7 +38,7 @@ pub fn spawn_torpedo(
             speed: 300.0,
             size: Vec2::new(30.0, 30.0),
             scale: Vec3::new(1.0, 1.0, 1.0),
-            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+            lifetime: Timer::from_seconds(15.0, TimerMode::Once),
         };
 
         commands
