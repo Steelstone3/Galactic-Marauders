@@ -34,8 +34,8 @@ pub fn spawn_torpedo(
         let texture = asset_server.load("player_torpedo.png");
 
         let torpedo = Torpedo {
-            speed: 0.0,
-            size: Vec2::new(15.0, 15.0),
+            speed: 10.0,
+            size: Vec2::new(30.0, 30.0),
             scale: Vec3::new(1.0, 1.0, 1.0),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };

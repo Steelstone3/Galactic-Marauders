@@ -1,6 +1,7 @@
 use bevy::{
     prelude::{
-        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
+        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, Vec3,
+        With,
     },
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
@@ -33,20 +34,24 @@ pub fn spawn_laser(
 
         let texture = asset_server.load("player_laser.png");
 
+        let laser = Laser {
+            speed: 10.0,
+            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+            size: Vec2::new(20.0, 20.0),
+            scale: Vec3::new(1.0, 1.0, 1.0),
+        };
+
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(Vec2::new(10.0, 10.0)),
+                    custom_size: Some(laser.size),
                     ..Default::default()
                 },
                 transform: *player_transform,
                 texture,
                 ..Default::default()
             })
-            .insert(Laser {
-                speed: 0.0,
-                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
-            });
+            .insert(laser);
 
         ammunition.0 -= 1.0;
 
