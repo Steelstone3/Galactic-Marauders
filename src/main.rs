@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use plugins::{
-    game_resources_plugin::GameResourcesPlugin, game_running_plugin::GameRunningPlugin,
-    game_start_plugin::GameStartPlugin,
+    game_resources::GameResourcesPlugin, game_running::GameRunningPlugin,
+    game_scale::GameScalePlugin, game_start::GameStartPlugin,
 };
 
 mod components;
@@ -24,6 +24,7 @@ fn main() {
             GameResourcesPlugin,
             GameStartPlugin,
             GameRunningPlugin,
+            GameScalePlugin,
         ))
         .run();
 }
