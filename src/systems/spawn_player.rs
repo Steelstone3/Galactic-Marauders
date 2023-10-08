@@ -5,8 +5,8 @@ use bevy::{
 
 use crate::components::player::Player;
 
-pub fn spawn_player(mut commands: Commands, _asset_server: Res<AssetServer>) {
-    // let texture = asset_server.load("player.png");
+pub fn spawn_player(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let texture = asset_server.load("player.png");
     let player = Player {
         speed: 400.0,
         size: Vec2::new(100.0, 100.0),
@@ -26,7 +26,7 @@ pub fn spawn_player(mut commands: Commands, _asset_server: Res<AssetServer>) {
             transform: Transform {
                 ..Default::default()
             },
-            // texture,
+            texture,
             ..Default::default()
         })
         .insert(player);
