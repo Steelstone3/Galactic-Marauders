@@ -3,12 +3,14 @@ use bevy::{
     time::Time,
 };
 
-use crate::{components::torpedo::Torpedo, resources::torpedo_ammunition::TorpedoAmmunition};
+use crate::{
+    components::player_torpedo::PlayerTorpedo, resources::torpedo_ammunition::TorpedoAmmunition,
+};
 
-pub fn torpedo_lifetime(
+pub fn player_torpedo_lifetime(
     mut commands: Commands,
     time: Res<Time>,
-    mut torpedos: Query<(Entity, &mut Torpedo)>,
+    mut torpedos: Query<(Entity, &mut PlayerTorpedo)>,
     mut ammunition: ResMut<TorpedoAmmunition>,
 ) {
     for (torpedo_entity, mut torpedo) in &mut torpedos {

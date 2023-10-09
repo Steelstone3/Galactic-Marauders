@@ -5,7 +5,7 @@ use bevy::{
 };
 
 #[derive(Component)]
-pub struct Torpedo {
+pub struct AlienLaser {
     pub speed: f32,
     pub size: Vec2,
     pub scale: Vec3,

@@ -1,10 +1,13 @@
-use crate::components::laser::Laser;
+use crate::components::player_laser::PlayerLaser;
 use bevy::{
     prelude::{Query, Res, Transform},
     time::Time,
 };
 
-pub fn laser_movement(mut characters: Query<(&mut Transform, &Laser)>, time: Res<Time>) {
+pub fn player_laser_movement(
+    mut characters: Query<(&mut Transform, &PlayerLaser)>,
+    time: Res<Time>,
+) {
     for (mut transform, laser) in &mut characters {
         let laser_speed = laser.speed * time.delta_seconds();
 

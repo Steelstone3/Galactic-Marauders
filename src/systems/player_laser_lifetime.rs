@@ -3,12 +3,12 @@ use bevy::{
     time::Time,
 };
 
-use crate::{components::laser::Laser, resources::laser_ammunition::LaserAmmunition};
+use crate::{components::player_laser::PlayerLaser, resources::laser_ammunition::LaserAmmunition};
 
-pub fn laser_lifetime(
+pub fn player_laser_lifetime(
     mut commands: Commands,
     time: Res<Time>,
-    mut lasers: Query<(Entity, &mut Laser)>,
+    mut lasers: Query<(Entity, &mut PlayerLaser)>,
     mut ammunition: ResMut<LaserAmmunition>,
 ) {
     for (laser_entity, mut laser) in &mut lasers {

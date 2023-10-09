@@ -1,5 +1,5 @@
 use bevy::{
-    prelude::{Input, KeyCode, Query, Res, ResMut, Transform, Mut},
+    prelude::{Input, KeyCode, Mut, Query, Res, ResMut, Transform},
     time::Time,
 };
 

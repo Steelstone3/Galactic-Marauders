@@ -8,15 +8,15 @@ use bevy::{
 };
 
 use crate::{
-    components::{laser::Laser, player::Player},
-    resources::{laser_ammunition::LaserAmmunition, selected_weapon::SelectedWeapon},
+    components::{player::Player, player_torpedo::PlayerTorpedo},
+    resources::{selected_weapon::SelectedWeapon, torpedo_ammunition::TorpedoAmmunition},
 };
 
-pub fn spawn_laser(
+pub fn spawn_player_torpedo(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
-    mut ammunition: ResMut<LaserAmmunition>,
+    mut ammunition: ResMut<TorpedoAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
     player: Query<&Transform, With<Player>>,
 ) {
@@ -24,40 +24,37 @@ pub fn spawn_laser(
         return;
     }
 
-    if selected_weapon.0 == 1 {
+    if selected_weapon.0 == 2 {
         let player_transform = player.get_single().unwrap();
 
         if ammunition.0 < 1.0 {
-            info!("Out of laser charge");
+            info!("Out of torpedos");
             return;
         }
 
-        let texture = asset_server.load("player_laser.png");
+        let texture = asset_server.load("player_torpedo.png");
 
-        let laser = Laser {
-            speed: 600.0,
-            lifetime: Timer::from_seconds(5.0, TimerMode::Once),
-            size: Vec2::new(20.0, 20.0),
+        let torpedo = PlayerTorpedo {
+            speed: 300.0,
+            size: Vec2::new(30.0, 30.0),
             scale: Vec3::new(1.0, 1.0, 1.0),
+            lifetime: Timer::from_seconds(15.0, TimerMode::Once),
         };
 
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(laser.size),
+                    custom_size: Some(torpedo.size),
                     ..Default::default()
                 },
                 transform: *player_transform,
                 texture,
                 ..Default::default()
             })
-            .insert(laser);
+            .insert(torpedo);
 
         ammunition.0 -= 1.0;
 
-        info!(
-            "Used 1 laser charge. {:?} laser charge remaining",
-            ammunition.0
-        );
+        info!("Fired 1 torpedo. {:?} torpedos remaining", ammunition.0);
     }
 }
