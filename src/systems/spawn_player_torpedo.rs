@@ -27,7 +27,7 @@ pub fn spawn_player_torpedo(
     if selected_weapon.0 == 2 {
         let player_transform = player.get_single().unwrap();
 
-        if ammunition.0 < 1.0 {
+        if ammunition.0 < 1 {
             info!("Out of torpedos");
             return;
         }
@@ -53,7 +53,7 @@ pub fn spawn_player_torpedo(
             })
             .insert(torpedo);
 
-        ammunition.0 -= 1.0;
+        ammunition.0 -= 1;
 
         info!("Fired 1 torpedo. {:?} torpedos remaining", ammunition.0);
     }

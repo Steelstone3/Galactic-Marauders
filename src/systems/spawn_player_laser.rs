@@ -27,7 +27,7 @@ pub fn spawn_player_laser(
     if selected_weapon.0 == 1 {
         let player_transform = player.get_single().unwrap();
 
-        if ammunition.0 < 1.0 {
+        if ammunition.0 < 1 {
             info!("Out of laser charge");
             return;
         }
@@ -53,7 +53,7 @@ pub fn spawn_player_laser(
             })
             .insert(laser);
 
-        ammunition.0 -= 1.0;
+        ammunition.0 -= 1;
 
         info!(
             "Used 1 laser charge. {:?} laser charge remaining",

@@ -19,7 +19,7 @@ pub fn player_torpedo_lifetime(
         if torpedo.lifetime.finished() {
             commands.entity(torpedo_entity).despawn();
 
-            ammunition.0 += 1.0;
+            ammunition.0 += 1;
 
             info!("Torpedos recovered Current torpedos: {:?}", ammunition.0);
         }

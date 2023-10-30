@@ -17,7 +17,7 @@ pub fn player_laser_lifetime(
         if laser.lifetime.finished() {
             commands.entity(laser_entity).despawn();
 
-            ammunition.0 += 1.0;
+            ammunition.0 += 1;
 
             info!(
                 "Laser charge recovered Current laser charge: {:?}",
